@@ -34,20 +34,20 @@ int getNiveau() {
 	return ctoi(niv);
 }
 
-void setInterval(int niv, int * startNb, int * endNb) {
+void setInterval(int niv, int& startNb, int& endNb) {
 
 	switch (niv) {
 		case 1:
-			// *startNb = 0;
-			*endNb = 100;
+			startNb = 0;
+			endNb = 100;
 			break;
 		case 2:
-			// *startNb = 0;
-			*endNb = 500;
+			startNb = 0;
+			endNb = 500;
 			break;
 		case 3:
-			// *startNb = 0;
-			*endNb = 1000;
+			startNb = 0;
+			endNb = 1000;
 			break;
 	}
 }
@@ -76,7 +76,7 @@ int main() {
 	int tour;
 	int randomNumber;
 	int niv;
-	int startNb = 0;
+	int startNb;
 	int endNb;
 	int nbTour;
 
@@ -89,7 +89,7 @@ int main() {
 
 	// définition de l'interval du nombre aléatoire,
 	// par rapport au niveau du jeu.
-	setInterval(niv, &startNb, &endNb);
+	setInterval(niv, startNb, endNb);
 
 	randomNumber = randint(startNb, endNb);
 	nbTour = min((endNb - startNb + 1)*2/3, maxTour);
