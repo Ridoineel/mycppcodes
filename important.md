@@ -19,10 +19,26 @@ int& referenceSurAge(age);
 ## Passage de paramaètre par référence
 
 ```cpp
-// Cette fonction modifie la variable n
+// Cette fonction modifie la variable n 
+// qui la réléférence est passé en paramètre
 
 int function(int& n) {
 	n *= 2;
 
 	return n;
 } 
+
+// Cette fonction ne peut modifier la variable n 
+int function(int const& n) {
+	n *= 2; // error
+
+	return n;
+} 
+```
+
+## En C++ les string chaines de caractère sont modifiable.
+
+```cpp
+string rid = "Midoine";
+rid[0] = 'R'; // 'M' -> 'R'
+```
