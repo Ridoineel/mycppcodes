@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cmath>
 
 #define CLEAR_BUFFER while (getchar() != '\n');
 
@@ -14,24 +14,12 @@ int randint(int min, int max) {
 }
 
 int ctoi(char digit) {
-	/* Conversion de chiffre char ('0' - '9') vers int
+	/* 	Renvoit la conversion de chiffre 
+	*	char ('0' - '9') vers int
 	*
 	*/
 
 	return digit - 48;
-}
-
-int getNiveau() {
-	char niv;
-
-	do {
-		cout << "Saisir votre choix (1-3): ";
-		cin >> niv;
-
-		CLEAR_BUFFER;
-	}while (niv <= '0' or niv > '3');
-
-	return ctoi(niv);
 }
 
 void setInterval(int niv, int& startNb, int& endNb) {
@@ -52,7 +40,7 @@ void setInterval(int niv, int& startNb, int& endNb) {
 	}
 }
 
-/*
+
 int getNiveau() {
 	string niv;
 
@@ -60,16 +48,38 @@ int getNiveau() {
 		cout << "Saisir votre choix (1-3): ";
 		getline(cin, niv);
 
-	}while (niv <= "0" or niv > "3");
+		if (niv.size() != 1 or niv <= "0" or niv > "3") {
+			cout << "Saisie invalide." << endl << endl;
+		}
+	}while (niv.size() != 1 or niv <= "0" or niv > "3");
 
-	return niv;
+	return ctoi(niv[0]);
 }
-*/
+
+string winnerStatus(int tour) {
+	/* Renvoi le status du gagnant 
+	*
+	*/
+
+	int tourRange = ceil((float(tour)/3));
+	
+	switch (tourRange) {
+		case 1:
+			return "super voyant";
+		case 2:
+			return "sage voyant";
+		case 3:
+			return "apprenti voyant";
+		default:
+			return "pusillanime";
+	}
+}
+
 int main() {
 	//
 	srand(time(0));
 
-	// Nombre de nbTour maximal du jeu
+	// Nombre de tour maximal du jeu
 	const int maxTour = 15;
 
 	int n;
@@ -78,8 +88,9 @@ int main() {
 	int niv;
 	int startNb;
 	int endNb;
-	int nbTour;
+	//int nbTour;
 
+	cout << "	JEU DE DEVINETTE" << endl << endl;
 	cout << "1. Niveau Facile (0-100)" << endl;
 	cout << "2. Niveau moyen (0-500)" << endl;
 	cout << "3. Niveau difficile (0-1000)" << endl;
@@ -94,25 +105,25 @@ int main() {
 	randomNumber = randint(startNb, endNb);
 	//nbTour = min((endNb - startNb + 1)*2/3, maxTour);
 	tour = maxTour;
-	
-	/*cout << randomNumber << endl;*/
-	printf("Salut, je viens de choisir un nombre compris entre %d-%d,\n", startNb, endNb);
-	cout << "essaie de le deviner." << endl;
+
+	cout << endl;
+	cout << "Salut, je viens de choisir un nombre compris entre " << startNb << "-" << endNb << endl;
+	cout << "essaie de le deviner." << endl << endl;
 
 	do {
-		cout << "Tour: " << tour << endl;
+		cout << "Tour restant: " << tour << endl;
 
 		cout << "Entrer le nombre: ";
 		cin >> n;
 
 		cout << endl;
 
-		if (n < randomNumber){
+		if (n > randomNumber){
 			cout << "Désolé, c'est plus petit que ça." << endl;
 			cout << endl;
 		}
 
-		if (n > randomNumber){
+		if (n < randomNumber){
 			cout << "Désolé, c'est plus grand que ça." << endl;
 			cout << endl;
 		}
@@ -121,14 +132,12 @@ int main() {
 
 	}while (n != randomNumber and tour > 0);
 
-
 	if (n == randomNumber) {
-		printf("Félication, %d est bien le nombre que j'ai choisie.\n", n);
-		printf("Trouvé en %d nbTour(s) sur %d.\n", nbTour - tour, nbTour);
-		// cout << "Félication, " << n << " est bien le nombre que j'ai choisie." << endl;
-		// cout << "Trouvé en " << TOUR - tour << " tours sur " << TOUR << endl;
+		cout << "Félication, " << n << " est bien le nombre que j'ai choisie." << endl;
+		cout << "Trouvé en " << maxTour - tour << "/" << maxTour << "tours." << endl;
+		cout << "Status gagnant: " << winnerStatus(maxTour - tour) << endl;
 	}else {
-		cout << "Nombre de nbTour épuisé." << endl;
+		cout << "Nombre de tour épuisé." << endl;
 	}
 
 	return 0;
