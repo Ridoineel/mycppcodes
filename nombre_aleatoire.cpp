@@ -70,7 +70,7 @@ int main() {
 	srand(time(0));
 
 	// Nombre de nbTour maximal du jeu
-	const int maxTour = 20;
+	const int maxTour = 15;
 
 	int n;
 	int tour;
@@ -92,8 +92,8 @@ int main() {
 	setInterval(niv, startNb, endNb);
 
 	randomNumber = randint(startNb, endNb);
-	nbTour = min((endNb - startNb + 1)*2/3, maxTour);
-	tour = nbTour;
+	//nbTour = min((endNb - startNb + 1)*2/3, maxTour);
+	tour = maxTour;
 	
 	/*cout << randomNumber << endl;*/
 	printf("Salut, je viens de choisir un nombre compris entre %d-%d,\n", startNb, endNb);
@@ -107,8 +107,13 @@ int main() {
 
 		cout << endl;
 
-		if (n != randomNumber){
-			cout << "Désolé ce n'est pas le bon nombre." << endl;
+		if (n < randomNumber){
+			cout << "Désolé, c'est plus petit que ça." << endl;
+			cout << endl;
+		}
+
+		if (n > randomNumber){
+			cout << "Désolé, c'est plus grand que ça." << endl;
 			cout << endl;
 		}
 
