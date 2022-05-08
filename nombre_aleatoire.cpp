@@ -2,8 +2,6 @@
 #include <cmath>
 #include <vector>
 
-#define CLEAR_BUFFER while (getchar() != '\n');
-
 using namespace std;
 
 int randint(int min, int max) {
@@ -23,9 +21,9 @@ int ctoi(char digit) {
 	return digit - 48;
 }
 
-void setInterval(int niv, int& startNb, int& endNb) {
+void setInterval(int level, int& startNb, int& endNb) {
 
-	switch (niv) {
+	switch (level) {
 		case 1:
 			startNb = 0;
 			endNb = 100;
@@ -42,19 +40,19 @@ void setInterval(int niv, int& startNb, int& endNb) {
 }
 
 
-int getNiveau() {
-	string niv;
+int getLevel() {
+	string level;
 
 	do {
 		cout << "Saisir votre choix (1-3): ";
-		getline(cin, niv);
+		getline(cin, level);
 
-		if (niv.size() != 1 or niv <= "0" or niv > "3") {
+		if (level.size() != 1 or level <= "0" or level > "3") {
 			cout << "Saisie invalide." << endl << endl;
 		}
-	}while (niv.size() != 1 or niv <= "0" or niv > "3");
+	}while (level.size() != 1 or level <= "0" or level > "3");
 
-	return ctoi(niv[0]);
+	return ctoi(level[0]);
 }
 
 string winnerStatus(int tour) {
@@ -77,8 +75,8 @@ string winnerStatus(int tour) {
 }
 
 float olympAvg(vector <int> vect) {
-	/*	Calcule et renvoit la moyenne olympique,
-	*	des nombres de <vect>
+	/*	Calcule et renvoit la moyenne olympique
+	*	des nombres de du tableau vect.
 	*
 	*/
 
@@ -105,7 +103,7 @@ int main() {
 	int n;
 	int tour;
 	int randomNumber;
-	int niv;
+	int level;
 	int startNb;
 	int endNb;
 	vector<int> tentatives;
@@ -117,11 +115,11 @@ int main() {
 	cout << "3. Niveau difficile (0-1000)" << endl;
 	cout << endl;
 
-	niv = getNiveau();
+	level = getLevel();
 
 	// définition de l'interval du nombre aléatoire,
 	// par rapport au niveau du jeu.
-	setInterval(niv, startNb, endNb);
+	setInterval(level, startNb, endNb);
 
 	randomNumber = randint(startNb, endNb);
 	//nbTour = min((endNb - startNb + 1)*2/3, maxTour);
