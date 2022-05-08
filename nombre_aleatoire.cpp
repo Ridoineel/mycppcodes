@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -81,7 +82,7 @@ float olympAvg(vector <int> vect) {
 	*/
 
 	int length = vect.size();
-	int sum;
+	int sum = 0;
 	float avg;
 
 	for (int i = 0; i < length; i++) {
@@ -93,7 +94,11 @@ float olympAvg(vector <int> vect) {
 	return avg;
 }
 
-int main() {
+void clearScreen() {
+	system("cls|clear");
+}
+
+void game(vector<int>& tentatives) {
 	//
 	srand(time(0));
 
@@ -106,8 +111,9 @@ int main() {
 	int level;
 	int startNb;
 	int endNb;
-	vector<int> tentatives;
 	//int nbTour;
+
+	clearScreen();
 
 	cout << "	JEU DE DEVINETTE" << endl << endl;
 	cout << "1. Niveau Facile (0-100)" << endl;
@@ -125,7 +131,9 @@ int main() {
 	//nbTour = min((endNb - startNb + 1)*2/3, maxTour);
 	tour = maxTour;
 
-	cout << endl;
+	clearScreen();
+
+	// cout << endl;
 	cout << "Salut, je viens de choisir un nombre compris entre " << startNb << "-" << endNb << endl;
 	cout << "essaie de le deviner." << endl << endl;
 
@@ -154,13 +162,56 @@ int main() {
 
 	}while (n != randomNumber and tour > 0);
 
+	clearScreen();
+
 	if (n == randomNumber) {
 		cout << "Félication, " << n << " est bien le nombre que j'ai choisie." << endl;
-		cout << "Trouvé en " << maxTour - tour << "/" << maxTour << "tours." << endl;
+		cout << "Trouvé en " << maxTour - tour << "/" << maxTour << " tours." << endl;
 		cout << "Status gagnant: " << winnerStatus(maxTour - tour) << endl;
 	}else {
 		cout << "Nombre de tour épuisé." << endl;
 	}
+
+	cout << endl;
+}
+
+int main() {
+	vector<int> tentatives;
+	char replay = 'O';
+
+	do {
+		game(tentatives);
+
+		// affichage de l'historique du jeu.
+		cout << "Les tentatives:" << endl;
+
+		for (int i = 0; i < tentatives.size(); i++) {
+			cout << "Tour " << i + 1 << ": " << tentatives[i] << endl;
+		}
+
+		cout << fixed << setprecision(2);
+		// ecart type
+
+		// moyenne olympique
+		cout << endl;
+		cout << "Moyenne olympique: " << olympAvg(tentatives) << endl;
+
+		cout << endl;
+		cout << "Voulez vous rejouer ? (O/N): ";
+		cin  >> replay;
+
+		// convertir replay en majuscule
+		// s'il est en miuscule
+		if (islower(replay)) {
+			replay -= 32;
+		}
+
+		cin.ignore();
+	}while (replay == 'O');
+
+	cout << endl;
+	cout << "Merci d'avoir jouer !" << endl;
+	cout << "Aurevoir." << endl;
 
 	return 0;
 }

@@ -6,16 +6,9 @@ using namespace std;
 
 int main()
 {
-	vector<string> v;
-	string rid = "Midoine";
-	rid[0] = 'R';
+	string a= "o";
 
-	rid += "dd";
-
-	v.push_back(rid);
-
-	cout << rid << endl;
-
+	cout << a.toLowerCase();
 
 	
 
