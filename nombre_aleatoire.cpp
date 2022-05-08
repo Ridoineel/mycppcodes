@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 #define CLEAR_BUFFER while (getchar() != '\n');
 
@@ -75,6 +76,25 @@ string winnerStatus(int tour) {
 	}
 }
 
+float olympAvg(vector <int> vect) {
+	/*	Calcule et renvoit la moyenne olympique,
+	*	des nombres de <vect>
+	*
+	*/
+
+	int length = vect.size();
+	int sum;
+	float avg;
+
+	for (int i = 0; i < length; i++) {
+		sum += vect[i];
+	}
+
+	avg = float(sum)/length;
+
+	return avg;
+}
+
 int main() {
 	//
 	srand(time(0));
@@ -88,6 +108,7 @@ int main() {
 	int niv;
 	int startNb;
 	int endNb;
+	vector<int> tentatives;
 	//int nbTour;
 
 	cout << "	JEU DE DEVINETTE" << endl << endl;
@@ -117,6 +138,9 @@ int main() {
 		cin >> n;
 
 		cout << endl;
+
+		// enregistrement de la tentative
+		tentatives.push_back(n);
 
 		if (n > randomNumber){
 			cout << "Désolé, c'est plus petit que ça." << endl;
