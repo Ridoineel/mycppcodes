@@ -10,7 +10,10 @@ int randint(int min, int max) {
 	*  min et max
 	*/
 
-	return min + rand()%(max - min + 1);
+	// nombre alétoire entre 0 et max - min + 1
+	int randNb = rand()%(max - min + 1);
+
+	return min + randNb;
 }
 
 int ctoi(char digit) {
@@ -23,6 +26,10 @@ int ctoi(char digit) {
 }
 
 void setInterval(int level, int& startNb, int& endNb) {
+	/*	Définit l'intervalle du nombre aléatoire
+	*	en modifiant les variables startNb et endNb
+	*
+	*/
 
 	switch (level) {
 		case 1:
@@ -57,8 +64,8 @@ int getLevel() {
 }
 
 string winnerStatus(int tour) {
-	/* Renvoi le status du gagnant 
-	*
+	/* 	Renvoi le status du gagnant 
+	*	par rapport au nombre de tour éffectué.
 	*/
 
 	int tourRange = ceil((float(tour)/3));
@@ -77,7 +84,7 @@ string winnerStatus(int tour) {
 
 float olympAvg(vector <int> vect) {
 	/*	Calcule et renvoit la moyenne olympique
-	*	des nombres de du tableau vect.
+	*	des nombres du tableau vect.
 	*
 	*/
 
@@ -123,7 +130,7 @@ void game(vector<int>& tentatives) {
 
 	level = getLevel();
 
-	// définition de l'interval du nombre aléatoire,
+	// définition de l'intervalle du nombre aléatoire,
 	// par rapport au niveau du jeu.
 	setInterval(level, startNb, endNb);
 

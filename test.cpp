@@ -8,8 +8,6 @@ int main()
 {
 	string a= "o";
 
-	cout << a.toLowerCase();
-
 	
 
 	return 0;
