@@ -101,6 +101,28 @@ float olympAvg(vector <int> vect) {
 	return avg;
 }
 
+float ecartType(vector<int> vect) {
+	/*
+	* 	Renvoi l'ecart type des valeurs 
+	*	du tableaux vect.
+	*	E = sqrt(sum(|xi - avg|^2)/n)	
+	*/
+
+	float avg = olympAvg(vect);
+	int n = vect.size();
+	float S;
+	float ect;
+
+	for (int i = 0; i < n; i++) {
+		S += pow(abs(vect[i] - avg), 2);
+	}
+
+
+	ect = sqrt(S/n);
+
+	return ect;
+}
+
 void clearScreen() {
 	system("cls|clear");
 }
@@ -197,8 +219,10 @@ int main() {
 		}
 
 		cout << fixed << setprecision(2);
-		// ecart type
 
+		// ecart type
+		cout << endl;
+		cout << "Ecart type: " << ecartType(tentatives) << endl;
 		// moyenne olympique
 		cout << endl;
 		cout << "Moyenne olympique: " << olympAvg(tentatives) << endl;
@@ -207,7 +231,7 @@ int main() {
 		cout << "Voulez vous rejouer ? (O/N): ";
 		cin  >> replay;
 
-		// convertir replay en majuscule
+		// convertir la vaiable replay en majuscule
 		// s'il est en miuscule
 		if (islower(replay)) {
 			replay -= 32;
